@@ -14,7 +14,7 @@ const SideBar = ({ children }: Props) => {
   const dispatch = useDispatch();
   return (
     <aside className="h-screen">
-      <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+      <nav className="h-full flex flex-col border-r shadow-sm">
         <div className="p-4 pb-4 flex justify-between items-center">
           <img
             src={logo}
@@ -31,6 +31,7 @@ const SideBar = ({ children }: Props) => {
             {isOpen ? <ChevronFirst /> : <ChevronLast />}
           </Button>
         </div>
+        {/* sidebar items */}
         <ul className="flex-1 px-3">{children}</ul>
         <div className="border-t flex p-3">
           <Avatar>
@@ -38,7 +39,7 @@ const SideBar = ({ children }: Props) => {
             <AvatarFallback>ADM</AvatarFallback>
           </Avatar>
           <div
-            className={`flex justify-between items-center overflow-hidden ${
+            className={`flex justify-between items-center overflow-hidden transition-all ${
               isOpen ? "w-40 ml-3" : "w-0"
             }`}
           >
