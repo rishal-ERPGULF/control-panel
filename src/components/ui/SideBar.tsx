@@ -4,7 +4,6 @@ import { Button } from "./button";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { useDispatch, useSelector } from "react-redux";
 import { selectSideBar, toggleSidebar } from "@/redux/slices/SidebarSlice";
-
 interface Props {
   children: React.ReactNode;
 }
@@ -33,6 +32,7 @@ const SideBar = ({ children }: Props) => {
         </div>
         {/* sidebar items */}
         <ul className="flex-1 px-3">{children}</ul>
+        {/* sidebar avatar */}
         <div className="border-t flex p-3">
           <Avatar>
             <AvatarImage src="https://github.com/shadcn.png" />

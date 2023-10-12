@@ -12,9 +12,9 @@ import { Input } from "@/components/ui/input";
 const Login = () => {
   return (
     <div className="h-screen grid place-items-center bg-gradient-to-tl from-gray-50 to-gray-300">
-      <Card className="md:w-96 py-10 shadow-md bg-white/10 bg-blur rounded-xl border-white border-2">
+      <Card className="md:w-96 py-10 shadow-gray-600 shadow-md bg-white/10 bg-blur rounded-xl border-white border-2">
         <CardHeader className="text-center">
-          <CardTitle>Dallah Mzad</CardTitle>
+          <CardTitle className="text-3xl">Dallah Mzad</CardTitle>
           <CardDescription>Admin login</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">

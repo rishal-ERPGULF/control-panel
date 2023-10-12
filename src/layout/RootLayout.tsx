@@ -3,6 +3,7 @@ import SideBarItem from "@/components/ui/SideBarItem";
 import { LayoutDashboard, Users, LayoutList } from "lucide-react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { ModeToggle } from "@/components/ui/ModeToggle";
 
 const RootLayout = () => {
   const [activeItem, setActiveItem] = useState("Dashboard");
@@ -11,7 +12,10 @@ const RootLayout = () => {
   };
   return (
     <div className="flex">
-      <SideBar> 
+      <div className="absolute right-4 bottom-4">
+        <ModeToggle />
+      </div>
+      <SideBar>
         <SideBarItem
           text="Dashboard"
           icon={<LayoutDashboard />}
