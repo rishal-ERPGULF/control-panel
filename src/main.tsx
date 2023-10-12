@@ -2,25 +2,17 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import RootLayout from "./layout/RootLayout";
+import { RouterProvider } from "react-router-dom";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
+import router from "./Routes/Routes";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { index: true, element: <div>Home</div> },
-      { path: "/about", element: <div>About</div> },
-      { path: "/users", element: <div>Users</div> },
-      { path: "*", element: <div>Not Found</div> },
-    ],
-  },
-]);
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );
