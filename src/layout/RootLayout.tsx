@@ -3,9 +3,10 @@ import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
   return (
-    <div >
-      <div className=""></div>
-      <SideBar />
+    <div className="flex">
+      <SideBar>
+        <p>hi</p>
+      </SideBar>
       <Outlet />
     </div>
   );
