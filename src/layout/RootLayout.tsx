@@ -1,6 +1,6 @@
 import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
-import { LayoutDashboard,Users } from "lucide-react";
+import { LayoutDashboard, Users, LayoutList } from "lucide-react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const RootLayout = () => {
   };
   return (
     <div className="flex">
-      <SideBar>
+      <SideBar> 
         <SideBarItem
           text="Dashboard"
           icon={<LayoutDashboard />}
@@ -22,6 +22,12 @@ const RootLayout = () => {
           text="Users"
           icon={<Users />}
           active={activeItem === "Users"}
+          handleItemClick={handleItemClick}
+        />
+        <SideBarItem
+          text="Bids"
+          icon={<LayoutList />}
+          active={activeItem === "Bids"}
           handleItemClick={handleItemClick}
         />
       </SideBar>

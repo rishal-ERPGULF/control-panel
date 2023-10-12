@@ -1,4 +1,5 @@
 import RootLayout from "@/layout/RootLayout";
+import Login from "@/screens/Login";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       { path: "/users", element: <div>Users</div> },
       { path: "*", element: <div>Not Found</div> },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 
