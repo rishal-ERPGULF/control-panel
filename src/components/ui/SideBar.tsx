@@ -94,7 +94,7 @@ const SideBar = ({ children }: Props) => {
                   });
                 }}
               >
-                Delete
+                Logout
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
