@@ -3,14 +3,28 @@ import logo from "../../assets/logo.svg";
 import { Button } from "./button";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./alert-dialog";
 import { selectSideBar, toggleSidebar } from "@/redux/slices/SidebarSlice";
+import { useState } from "react";
+import { toast } from "./use-toast";
+import { useNavigate } from "react-router-dom";
 interface Props {
   children: React.ReactNode;
 }
 
 const SideBar = ({ children }: Props) => {
+  const navigate = useNavigate();
   const isOpen = useSelector(selectSideBar);
   const dispatch = useDispatch();
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col border-r shadow-sm">
@@ -49,11 +63,42 @@ const SideBar = ({ children }: Props) => {
             </div>
           </div>
           {isOpen && (
-            <Button size={"icon"} variant={"outline"}>
+            <Button
+              size={"icon"}
+              variant={"outline"}
+              onClick={() => setShowLogoutDialog(true)}
+            >
               <LogOut className="text-red-600" />
             </Button>
           )}
         </div>
+        <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure want to Logout?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action will log you out.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  localStorage.removeItem("access_token");
+                  localStorage.removeItem("refresh_token");
+                  navigate("/login");
+                  setShowLogoutDialog(false);
+                  toast({
+                    description: "Logged out successfully.",
+                  });
+                }}
+              >
+                Delete
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </nav>
     </aside>
   );

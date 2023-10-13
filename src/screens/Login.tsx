@@ -14,10 +14,12 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   interface Inputs {
     email: string;
     password: string;
@@ -43,11 +45,12 @@ const Login = () => {
             title: "Success",
             description: "You have successfully logged in.",
           });
+          navigate("/");
         })
         .catch(() => {
           toast({
             variant: "destructive",
-            title: "Uh oh! Login went wrong.",
+            title: "Uh oh! Email or password invalid.",
             description:
               "There was a problem with your login attempt.Try again.",
           });
@@ -64,11 +67,11 @@ const Login = () => {
   };
 
   return (
-    <div className="h-screen grid place-items-center">
+    <div className="h-screen grid place-items-center ">
       <div className="absolute right-4 bottom-4">
         <ModeToggle />
       </div>
-      <Card className="md:w-96 py-10 shadow-gray-600 shadow-md bg-white/10 bg-blur rounded-xl border-white border-2">
+      <Card className="md:w-96 py-10 shadow-md rounded-xl border-gray-800 border-2">
         <CardHeader className="text-center">
           <CardTitle className="text-3xl">Dallah Mzad</CardTitle>
           <CardDescription>Admin login</CardDescription>
