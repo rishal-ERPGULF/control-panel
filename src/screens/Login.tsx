@@ -12,13 +12,16 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { setAdminDetails } from "@/redux/slices/AdminSlice";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   interface Inputs {
     email: string;
@@ -39,12 +42,13 @@ const Login = () => {
     try {
       setIsLoading(true);
       await AdminLogin(data)
-        .then(() => {
+        .then((res) => {
           toast({
             variant: "default",
             title: "Success",
             description: "You have successfully logged in.",
           });
+          dispatch(setAdminDetails(res));
           navigate("/");
         })
         .catch(() => {

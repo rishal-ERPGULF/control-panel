@@ -16,6 +16,7 @@ import { selectSideBar, toggleSidebar } from "@/redux/slices/SidebarSlice";
 import { useState } from "react";
 import { toast } from "./use-toast";
 import { useNavigate } from "react-router-dom";
+import { setAdminSignOut, selectAdminDetails } from "@/redux/slices/AdminSlice";
 interface Props {
   children: React.ReactNode;
 }
@@ -23,8 +24,10 @@ interface Props {
 const SideBar = ({ children }: Props) => {
   const navigate = useNavigate();
   const isOpen = useSelector(selectSideBar);
-  const dispatch = useDispatch();
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const dispatch = useDispatch();
+  const adminDetails = useSelector(selectAdminDetails);
+
   return (
     <aside className="h-screen">
       <nav className="h-full flex flex-col border-r shadow-sm">
@@ -37,6 +40,7 @@ const SideBar = ({ children }: Props) => {
             }`}
           />
           <Button
+            className="dark:hover:bg-gray-900"
             variant={"ghost"}
             size={"icon"}
             onClick={() => dispatch(toggleSidebar())}
@@ -57,13 +61,14 @@ const SideBar = ({ children }: Props) => {
               isOpen ? "w-40 ml-3" : "w-0"
             }`}
           >
-            <div className="leading-4">
-              <h4 className="font-semibold">Admin</h4>
+            <div className="leading-4 flex flex-col justify-center">
+              <span className="font-semibold">{adminDetails.name}</span>
               <span className="text-xs text-gray-600">Admin@admin</span>
             </div>
           </div>
           {isOpen && (
             <Button
+              className="dark:hover:bg-gray-900"
               size={"icon"}
               variant={"outline"}
               onClick={() => setShowLogoutDialog(true)}
@@ -87,6 +92,7 @@ const SideBar = ({ children }: Props) => {
                 onClick={() => {
                   localStorage.removeItem("access_token");
                   localStorage.removeItem("refresh_token");
+                  dispatch(setAdminSignOut());
                   navigate("/login");
                   setShowLogoutDialog(false);
                   toast({

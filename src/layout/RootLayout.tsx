@@ -17,18 +17,21 @@ const RootLayout = () => {
       </div>
       <SideBar>
         <SideBarItem
+          path="/"
           text="Dashboard"
           icon={<LayoutDashboard />}
           active={activeItem === "Dashboard"}
           handleItemClick={handleItemClick}
         />
         <SideBarItem
+          path="/users"
           text="Users"
           icon={<Users />}
           active={activeItem === "Users"}
           handleItemClick={handleItemClick}
         />
         <SideBarItem
+          path="/bids"
           text="Bids"
           icon={<LayoutList />}
           active={activeItem === "Bids"}
