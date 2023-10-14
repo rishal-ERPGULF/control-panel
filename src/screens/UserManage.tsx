@@ -1,11 +1,12 @@
 import { fetchAllUsers } from "@/ApiManager/AdminControl";
 import { columns } from "@/components/ui/Colums";
 import { DataTable } from "@/components/ui/DataTable";
+import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
+import { Heading1, Loader } from "lucide-react";
 
 const UserManage = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: fetchAllUsers,
   });
@@ -20,8 +21,21 @@ const UserManage = () => {
         <div className="">
           {isLoading ? (
             <Loader size={56} className="animate-spin" />
-          ) : (
+          ) : data ? (
             <DataTable columns={columns} data={data} />
+          ) : (
+            <>
+              <span className="text-lg text-gray-800 dark:text-white">
+                Failed to get users data.
+              </span>
+              <Button
+                onClick={() => refetch()}
+                variant={"link"}
+                className="text-lg font-medium text-blue-500"
+              >
+                Try again!
+              </Button>
+            </>
           )}
         </div>
       </div>

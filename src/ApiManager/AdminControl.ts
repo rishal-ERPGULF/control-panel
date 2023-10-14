@@ -12,7 +12,39 @@ AdminApi.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
+// middleware to refresh token if expired
+const refreshAccessToken = async () => {
+  try {
+    const refresh_token = localStorage.getItem("refresh_token");
+    const { data } = await AdminApi.post("/admin/refresh-token", {
+      refresh_token,
+    });
+    localStorage.setItem("access_token", data.data?.access_token);
+    localStorage.setItem("refresh_token", data.data?.refresh_token);
+    return data.data;
+  } catch (error) {
+    return Promise.reject(new Error("Failed to refresh token"));
+  }
+};
+let refreshPromise: Promise<any> | null = null;
+const clearRefreshPromise = () => (refreshPromise = null);
 
+AdminApi.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      if (!refreshPromise) {
+        refreshPromise = refreshAccessToken().finally(clearRefreshPromise);
+      }
+      const data = await refreshPromise;
+      originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
+      return AdminApi(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
 export const AdminLogin = async (formData: loginForm) => {
   try {
     const { data } = await AdminApi.post("/admin/sign-in", formData);
