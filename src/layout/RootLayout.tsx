@@ -1,15 +1,11 @@
 import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
 import { LayoutDashboard, Users, LayoutList } from "lucide-react";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 
 const RootLayout = () => {
-  const [activeItem, setActiveItem] = useState("Dashboard");
-  const handleItemClick = (text: string) => {
-    setActiveItem(text);
-  };
+  const currentPath = useLocation().pathname;
   return (
     <div className="flex">
       <div className="absolute right-4 bottom-4">
@@ -20,22 +16,19 @@ const RootLayout = () => {
           path="/"
           text="Dashboard"
           icon={<LayoutDashboard />}
-          active={activeItem === "Dashboard"}
-          handleItemClick={handleItemClick}
+          active={currentPath === "/"}
         />
         <SideBarItem
           path="/users"
           text="Users"
           icon={<Users />}
-          active={activeItem === "Users"}
-          handleItemClick={handleItemClick}
+          active={currentPath === "/users"}
         />
         <SideBarItem
           path="/bids"
           text="Bids"
           icon={<LayoutList />}
-          active={activeItem === "Bids"}
-          handleItemClick={handleItemClick}
+          active={currentPath === "/bids"}
         />
       </SideBar>
       <div className="flex-1">

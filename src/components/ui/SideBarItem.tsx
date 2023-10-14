@@ -6,16 +6,14 @@ interface Props {
   icon: React.ReactNode;
   text: string;
   active: boolean;
-  handleItemClick: (text: string) => void;
 }
 
-const SideBarItem = ({ path, icon, text, active, handleItemClick }: Props) => {
+const SideBarItem = ({ path, icon, text, active }: Props) => {
   const isOpen = useSelector(selectSideBar);
   const navigate = useNavigate();
   return (
     <li
       onClick={() => {
-        handleItemClick(text);
         navigate(path);
       }}
       className={`relative flex justify-center items-center py-2 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
