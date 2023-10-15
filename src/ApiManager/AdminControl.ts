@@ -15,12 +15,10 @@ AdminApi.interceptors.request.use(
 // middleware to refresh token if expired
 const refreshAccessToken = async () => {
   try {
-    console.log("refreshing token");
     const refresh_token = localStorage.getItem("refresh_token");
-    const { data, status } = await AdminApi.post("/admin/refresh-token", {
+    const { data } = await AdminApi.post("/admin/refresh-token", {
       refresh_token,
     });
-    console.log(data, status);
     localStorage.setItem("access_token", data.data?.access_token);
     localStorage.setItem("refresh_token", data.data?.refresh_token);
     return data.data;

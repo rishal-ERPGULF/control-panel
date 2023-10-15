@@ -21,11 +21,21 @@ const UserManage = () => {
           <ModeToggle />
         </div>
       </nav>
-      <div className="flex flex-1 bg-gray-200 dark:bg-gray-950 ">
+      <div className="flex flex-1 bg-gray-200 dark:bg-gray-950">
         {isLoading ? (
-          <Loader2 size={64} className="animate-spin" />
+          <div className="absolute left-1/2 top-1/3">
+            <Loader2 size={64} className="animate-spin" />
+          </div>
         ) : data ? (
-          <div className="hidden h-full flex-1 flex-col space-y-8 p-5 md:flex">
+          <div className="hidden h-full flex-1 flex-col space-y-4 p-5 md:flex">
+            <div className="flex justify-end">
+              <Button
+                variant={"default"}
+                className="font-semibold"
+              >
+                New User
+              </Button>
+            </div>
             <DataTable columns={columns} data={data} />
           </div>
         ) : (
