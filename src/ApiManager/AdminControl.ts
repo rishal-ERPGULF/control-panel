@@ -15,32 +15,42 @@ AdminApi.interceptors.request.use(
 // middleware to refresh token if expired
 const refreshAccessToken = async () => {
   try {
+    console.log("refreshing token");
     const refresh_token = localStorage.getItem("refresh_token");
-    const { data } = await AdminApi.post("/admin/refresh-token", {
+    const { data, status } = await AdminApi.post("/admin/refresh-token", {
       refresh_token,
     });
+    console.log(data, status);
     localStorage.setItem("access_token", data.data?.access_token);
     localStorage.setItem("refresh_token", data.data?.refresh_token);
     return data.data;
   } catch (error) {
+    console.error("Error refreshing token:", error);
     return Promise.reject(new Error("Failed to refresh token"));
   }
 };
 let refreshPromise: Promise<any> | null = null;
-const clearRefreshPromise = () => (refreshPromise = null);
-
+// Function to clear the refresh promise and reset the flag
+const clearRefreshPromise = () => {
+  refreshPromise = null;
+};
 AdminApi.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      if (!refreshPromise) {
-        refreshPromise = refreshAccessToken().finally(clearRefreshPromise);
+      try {
+        if (!refreshPromise) {
+          refreshPromise = refreshAccessToken().finally(clearRefreshPromise);
+        }
+        const token = await refreshPromise;
+        originalRequest.headers.Authorization = `Bearer ${token.access_token}`;
+        return AdminApi(originalRequest);
+      } catch (error) {
+        console.error("Error refreshing token:", error);
+        return Promise.reject(error);
       }
-      const data = await refreshPromise;
-      originalRequest.headers.Authorization = `Bearer ${data.access_token}`;
-      return AdminApi(originalRequest);
     }
     return Promise.reject(error);
   }

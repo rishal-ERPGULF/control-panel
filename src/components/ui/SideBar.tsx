@@ -77,35 +77,35 @@ const SideBar = ({ children }: Props) => {
             </Button>
           )}
         </div>
-        <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure want to Logout?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action will log you out.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <Button
-                variant="destructive"
-                onClick={() => {
-                  localStorage.removeItem("access_token");
-                  localStorage.removeItem("refresh_token");
-                  dispatch(setAdminSignOut());
-                  navigate("/login");
-                  setShowLogoutDialog(false);
-                  toast({
-                    description: "Logged out successfully.",
-                  });
-                }}
-              >
-                Logout
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </nav>
+      <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure want to Logout?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action will log you out.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
+                dispatch(setAdminSignOut());
+                navigate("/login");
+                setShowLogoutDialog(false);
+                toast({
+                  description: "Logged out successfully.",
+                });
+              }}
+            >
+              Logout
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </aside>
   );
 };

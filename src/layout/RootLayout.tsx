@@ -8,9 +8,9 @@ const RootLayout = () => {
   const currentPath = useLocation().pathname;
   return (
     <div className="flex">
-      <div className="absolute right-4 bottom-4">
-        <ModeToggle />
-      </div>
+      {/* <div className="fixed right-10 bottom-10">
+        
+      </div> */}
       <SideBar>
         <SideBarItem
           path="/"
