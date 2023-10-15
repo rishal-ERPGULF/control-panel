@@ -33,6 +33,7 @@ const SideBarItem = ({ path, icon, text, active }: Props) => {
       {!isOpen && (
         <div
           className={`
+          z-50
         absolute left-full rounded-md px-2 py-1 ml-6
         bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-white/70 text-sm
         invisible opacity-20 -translate-x-3 transition-all

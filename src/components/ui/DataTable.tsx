@@ -64,11 +64,11 @@ export function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody className="bg-white dark:bg-gray-900">
+        <TableBody className="bg-white dark:bg-gray-800">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-                className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800"
+                className="cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
               >

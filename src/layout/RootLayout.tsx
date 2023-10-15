@@ -7,9 +7,7 @@ const RootLayout = () => {
   const currentPath = useLocation().pathname;
   return (
     <div className="flex">
-      {/* <div className="fixed right-10 bottom-10">
-        
-      </div> */}
+ 
       <SideBar>
         <SideBarItem
           path="/"

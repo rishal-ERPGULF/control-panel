@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "./button";
-
+import { Edit, Trash2 } from "lucide-react";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type User = {
@@ -67,12 +67,20 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => (
       <div className="flex justify-center items-center">
         <Button
+          variant="ghost"
           onClick={() => {
             console.log(row.getValue("id"));
           }}
-          className="text-md font-medium"
         >
-          Edit
+          <Edit size={24} />
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            console.log(row.getValue("id"));
+          }}
+        >
+          <Trash2 size={24} className="text-red-600" />
         </Button>
       </div>
     ),
