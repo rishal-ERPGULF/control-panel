@@ -2,7 +2,6 @@ import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
 import { LayoutDashboard, Users, LayoutList } from "lucide-react";
 import { Outlet, useLocation } from "react-router-dom";
-import { ModeToggle } from "@/components/ui/ModeToggle";
 
 const RootLayout = () => {
   const currentPath = useLocation().pathname;

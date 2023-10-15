@@ -70,7 +70,7 @@ export const columns: ColumnDef<User>[] = [
           onClick={() => {
             console.log(row.getValue("id"));
           }}
-          className="text-md font-semibold"
+          className="text-md font-medium"
         >
           Edit
         </Button>
