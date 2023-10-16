@@ -54,10 +54,31 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "is_black_listed",
     header: "Black Listed",
+    cell: ({ row }) => (
+      <div className="flex justify-center items-center">
+        {row.getValue("is_black_listed") === true ? (
+          <div className="bg-red-300 px-3 rounded-md text-sm text-red-800 font-semibold py-0.5">
+            true
+          </div>
+        ) : (
+          <div className="bg-green-300 px-3 rounded-md text-sm text-green-800 font-semibold py-0.5">
+            false
+          </div>
+        )}
+      </div>
+    ),
   },
   {
     accessorKey: "registered_on",
     header: "Registered On",
+    cell: ({ row }) => {
+      const date = new Date(row.getValue("registered_on"));
+      return (
+        <div className="flex justify-center items-center">
+          {date.toLocaleDateString()}
+        </div>
+      );
+    },
   },
   {
     id: "actions",
@@ -65,22 +86,24 @@ export const columns: ColumnDef<User>[] = [
       <div className="flex justify-center items-center">Actions</div>
     ),
     cell: ({ row }) => (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center space-x-2">
         <Button
-          variant="ghost"
+          variant="default"
+          className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
           onClick={() => {
             console.log(row.getValue("id"));
           }}
         >
-          <Edit size={24} />
+          <Edit size={24} className="text-gray-400 dark:text-gray-200" />
         </Button>
         <Button
-          variant="outline"
+          variant="default"
+          className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
           onClick={() => {
             console.log(row.getValue("id"));
           }}
         >
-          <Trash2 size={24} className="text-red-600" />
+          <Trash2 size={24} className="text-gray-400 dark:text-gray-200" />
         </Button>
       </div>
     ),
