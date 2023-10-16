@@ -5,7 +5,7 @@ interface SidebarState {
   isOpen: boolean;
 }
 const initialState: SidebarState = {
-  isOpen: false,
+  isOpen: true,
 };
 
 export const sidebarSlice = createSlice({
