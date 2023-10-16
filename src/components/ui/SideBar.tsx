@@ -73,7 +73,7 @@ const SideBar = ({ children }: Props) => {
               variant={"outline"}
               onClick={() => setShowLogoutDialog(true)}
             >
-              <LogOut className="text-red-600" />
+              <LogOut size={18} className="text-red-500" />
             </Button>
           )}
         </div>

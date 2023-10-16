@@ -73,3 +73,16 @@ export const fetchAllUsers = async () => {
     return Promise.reject(new Error("Failed to fetch users"));
   }
 };
+
+export const enableDisableUser = async (id: string, value: string) => {
+  try {
+    const { data } = await AdminApi.post(`/user/enable-disable-user`, {
+      user_id: id,
+      value,
+    });
+    return Promise.resolve(data.data.message);
+  } catch (error) {
+    console.error(error);
+    return Promise.reject(new Error("Failed to enable/disable user"));
+  }
+};

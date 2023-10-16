@@ -30,8 +30,7 @@ const UserManage = () => {
           <div className="hidden h-full flex-1 flex-col space-y-4 p-5 md:flex">
             <div className="flex justify-end">
               <Button
-                variant={"default"}
-                className="font-semibold"
+                className="font-semibold dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-100 text-gray-800"
               >
                 New User
               </Button>

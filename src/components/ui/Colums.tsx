@@ -2,9 +2,11 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "./button";
-import { Edit, Trash2 } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { enableDisableUser } from "@/ApiManager/AdminControl";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
+
 export type User = {
   id: string;
   display_name: string;
@@ -17,7 +19,6 @@ export type User = {
   is_black_listed: "false" | "true";
   registered_on: string;
 };
-
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "id",
@@ -83,27 +84,53 @@ export const columns: ColumnDef<User>[] = [
     header: () => (
       <div className="flex justify-center items-center">Actions</div>
     ),
-    cell: ({ row }) => (
-      <div className="flex justify-center items-center space-x-2">
-        <Button
-          variant="default"
-          className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
-          onClick={() => {
-            console.log(row.getValue("id"));
-          }}
-        >
-          <Edit size={24} className="text-gray-400 dark:text-gray-200" />
-        </Button>
-        <Button
-          variant="default"
-          className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
-          onClick={() => {
-            console.log(row.getValue("id"));
-          }}
-        >
-          <Trash2 size={24} className="text-gray-400 dark:text-gray-200" />
-        </Button>
-      </div>
-    ),
+    cell: ({ row }) => {
+      const queryClient = useQueryClient();
+      interface enableDisableUser {
+        id: string;
+        value: "true" | "false";
+      }
+      const { mutateAsync } = useMutation({
+        mutationFn: ({ id, value }: enableDisableUser) =>
+          enableDisableUser(id, value),
+        onSuccess: () => {
+          queryClient.invalidateQueries(["users"]);
+        },
+      });
+      return (
+        <div className="flex justify-center items-center space-x-2">
+          <Button
+            variant="default"
+            className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
+            onClick={() => {
+              console.log(row.getValue("id"));
+            }}
+          >
+            <span className="text-blue-500 font-semibold">Edit</span>
+          </Button>
+          {row.getValue("is_black_listed") === false ? (
+            <Button
+              variant="default"
+              className="bg-white dark:bg-gray-800 hover:bg-red-300 text-red-500 font-semibold"
+              onClick={async () => {
+                await mutateAsync({ id: row.getValue("id"), value: "true" });
+              }}
+            >
+              Disable
+            </Button>
+          ) : (
+            <Button
+              variant="default"
+              className="bg-white dark:bg-gray-800 hover:bg-green-300 text-green-500 font-semibold"
+              onClick={async () => {
+                await mutateAsync({ id: row.getValue("id"), value: "false" });
+              }}
+            >
+              Enable
+            </Button>
+          )}
+        </div>
+      );
+    },
   },
 ];
