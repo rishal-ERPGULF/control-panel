@@ -14,7 +14,7 @@ import rootReducer from "./rootReducer";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["sidebar", "datatable"],
+  blacklist: ["sidebar", ],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

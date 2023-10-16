@@ -17,25 +17,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./button";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectDataTableIndex,
-  setDecrement,
-  setIncrement,
-} from "@/redux/slices/DataTableSlice";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  pageSize?: number;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const DtIndex = useSelector(selectDataTableIndex);
-  const dispatch = useDispatch();
   const table = useReactTable({
     data,
     columns,
@@ -44,7 +35,6 @@ export function DataTable<TData, TValue>({
     initialState: {
       pagination: {
         pageSize: 8,
-        pageIndex: DtIndex,
       },
     },
   });
@@ -103,7 +93,6 @@ export function DataTable<TData, TValue>({
           size="sm"
           onClick={() => {
             table.previousPage();
-            dispatch(setDecrement());
           }}
           disabled={!table.getCanPreviousPage()}
         >
@@ -114,7 +103,6 @@ export function DataTable<TData, TValue>({
           size="sm"
           onClick={() => {
             table.nextPage();
-            dispatch(setIncrement());
           }}
           disabled={!table.getCanNextPage()}
         >
