@@ -24,12 +24,12 @@ export const columns: ColumnDef<User>[] = [
     header: "Id",
   },
   {
-    accessorKey: "email",
-    header: "Email",
-  },
-  {
     accessorKey: "display_name",
     header: "Display Name",
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
   },
   {
     accessorKey: "first_name",
@@ -55,7 +55,7 @@ export const columns: ColumnDef<User>[] = [
     accessorKey: "is_black_listed",
     header: "Black Listed",
     cell: ({ row }) => (
-      <div className="flex justify-center items-center">
+      <div className="flex items-center">
         {row.getValue("is_black_listed") === true ? (
           <div className="bg-red-300 px-3 rounded-md text-sm text-red-800 font-semibold py-0.5">
             true
@@ -74,9 +74,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const date = new Date(row.getValue("registered_on"));
       return (
-        <div className="flex justify-center items-center">
-          {date.toLocaleDateString()}
-        </div>
+        <div className="flex items-center">{date.toLocaleDateString()}</div>
       );
     },
   },
