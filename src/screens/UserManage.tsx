@@ -13,7 +13,7 @@ const UserManage = () => {
   });
   return (
     <div className="flex flex-1 flex-col h-screen">
-      <nav className="h-16 w-full flex items-center border-b justify-between">
+      <nav className="w-full flex items-center border-b justify-between py-4">
         <span className="text-2xl text-gray-800 dark:text-white ml-10 font-medium">
           User Management
         </span>
@@ -27,7 +27,7 @@ const UserManage = () => {
             <Loader2 size={64} className="animate-spin" />
           </div>
         ) : data ? (
-          <div className="hidden h-full flex-1 flex-col space-y-4 p-5 md:flex">
+          <div className="hidden h-full flex-1 flex-grow flex-col space-y-4 p-5 md:flex">
             <div className="flex justify-end">
               <Button
                 className="font-semibold dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-100 text-gray-800"
