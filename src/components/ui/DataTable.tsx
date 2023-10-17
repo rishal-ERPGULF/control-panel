@@ -6,6 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
+  getFilteredRowModel,
+  ColumnFiltersState,
 } from "@tanstack/react-table";
 
 import {
@@ -17,6 +19,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "./button";
+import { useState } from "react";
+import { Input } from "./input";
+import { Search } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -27,11 +32,17 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    state: {
+      columnFilters,
+    },
     initialState: {
       pagination: {
         pageSize: 8,
@@ -39,9 +50,21 @@ export function DataTable<TData, TValue>({
     },
     autoResetPageIndex: false,
   });
-
   return (
     <div className="border-2 border-gray-300 dark:border-gray-500 rounded-md">
+      <div className="flex items-center p-4 justify-end">
+        <div className="flex items-center border-2 rounded-lg">
+          <Input
+            placeholder="search by email..."
+            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("email")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm bg-transparent border-0 flex-1"
+          />
+          <Search className="mx-2 text-gray-400" />
+        </div>
+      </div>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
