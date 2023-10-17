@@ -86,3 +86,20 @@ export const enableDisableUser = async (id: string, value: string) => {
     return Promise.reject(new Error("Failed to enable/disable user"));
   }
 };
+interface userRegisterForm {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  phone?: string;
+  qid?: string;
+}
+
+export const UserRegister = async (formData: userRegisterForm) => {
+  try {
+    await AdminApi.post("/user/register", formData);
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to register user"));
+  }
+};
