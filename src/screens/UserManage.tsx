@@ -5,8 +5,10 @@ import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const UserManage = () => {
+  const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: fetchAllUsers,
@@ -30,6 +32,7 @@ const UserManage = () => {
           <div className="hidden h-full flex-1 flex-grow flex-col space-y-4 p-5 md:flex">
             <div className="flex justify-end">
               <Button
+                onClick={() => navigate("new")}
                 className="font-semibold dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-100 text-gray-800"
               >
                 New User
