@@ -1,3 +1,5 @@
+import { NewUserRegister } from "@/ApiManager/AdminControl";
+import { ButtonLoading } from "@/components/ui/ButtonLoading";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,9 +11,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToast } from "@/components/ui/use-toast";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 const UserRegister = () => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   interface Inputs {
     first_name: string;
     last_name: string;
@@ -24,7 +30,7 @@ const UserRegister = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     watch,
   } = useForm<Inputs>({
     defaultValues: {
@@ -37,8 +43,40 @@ const UserRegister = () => {
       confirmPassword: "",
     },
   });
-  const onSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    try {
+      setIsLoading(true);
+      await NewUserRegister({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        phone: data.phone,
+        qid: data.qid,
+        password: data.password,
+      })
+        .then(() => {
+          toast({
+            variant: "default",
+            title: "User added successfully.",
+            description: "User has been added successfully.",
+          });
+        })
+        .catch((error) => {
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: error,
+          });
+        });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your login attempt.",
+      });
+    } finally {
+      setIsLoading(false); // Ensure that this code is always executed
+    }
   };
   return (
     <div className="flex flex-1 flex-col h-screen">
@@ -219,12 +257,17 @@ const UserRegister = () => {
             </div>
           </CardContent>
           <CardFooter className="flex-col">
-            <Button
-              onClick={handleSubmit(onSubmit)}
-              className="w-full font-semibold"
-            >
-              ADD USER
-            </Button>
+            {isLoading ? (
+              <ButtonLoading />
+            ) : (
+              <Button
+                onClick={handleSubmit(onSubmit)}
+                className="w-full font-semibold bg-gray-950 hover:bg-gray-300 text-white dark:text-gray-900 dark:bg-gray-300 dark:hover:bg-gray-950 dark:hover:text-white"
+                variant={"outline"}
+              >
+                ADD USER
+              </Button>
+            )}
           </CardFooter>
         </Card>
       </div>

@@ -7,7 +7,6 @@ const RootLayout = () => {
   const currentPath = useLocation().pathname;
   return (
     <div className="flex">
- 
       <SideBar>
         <SideBarItem
           path="/"

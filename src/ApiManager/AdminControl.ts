@@ -95,7 +95,7 @@ interface userRegisterForm {
   qid?: string;
 }
 
-export const UserRegister = async (formData: userRegisterForm) => {
+export const NewUserRegister = async (formData: userRegisterForm) => {
   try {
     await AdminApi.post("/user/register", formData);
     return Promise.resolve();
