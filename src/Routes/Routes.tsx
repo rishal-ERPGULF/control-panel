@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { LoginRoute, ProtectedRoute } from "./Auth";
 import UserManage from "@/screens/UserManage";
 import UserRegister from "@/screens/UserRegister";
+import UserEdit from "@/screens/UserEdit";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <UserManage /> },
           { path: "new", element: <UserRegister /> },
+          { path: "edit/:id", element: <UserEdit /> },
         ],
       },
       { path: "/bids", element: <div>bids</div> },

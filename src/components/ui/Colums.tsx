@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "./button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { enableDisableUser } from "@/ApiManager/AdminControl";
+import { useNavigate } from "react-router-dom";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
@@ -86,6 +87,7 @@ export const columns: ColumnDef<User>[] = [
     ),
     cell: ({ row }) => {
       const queryClient = useQueryClient();
+      const navigate = useNavigate();
       interface enableDisableUser {
         id: string;
         value: "true" | "false";
@@ -103,7 +105,7 @@ export const columns: ColumnDef<User>[] = [
             variant="default"
             className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
             onClick={() => {
-              console.log(row.getValue("id"));
+              navigate(`/users/edit/${row.getValue("id")}`);
             }}
           >
             <span className="text-blue-500 font-semibold">Edit</span>
