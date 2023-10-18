@@ -35,7 +35,7 @@ const SideBarItem = ({ path, icon, text, active }: Props) => {
           className={`
           z-50
         absolute left-full rounded-md px-2 py-1 ml-6
-        bg-white text-gray-800 dark:bg-gray-900 dark:text-white/70 text-sm
+        bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-white/70 text-sm
         invisible opacity-20 -translate-x-3 transition-all
         group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
     `}
