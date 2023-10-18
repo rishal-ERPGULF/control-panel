@@ -103,7 +103,7 @@ export const columns: ColumnDef<User>[] = [
         <div className="flex justify-center items-center space-x-2">
           <Button
             variant="default"
-            className="bg-white hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-900"
+            className="bg-white hover:bg-blue-200 dark:hover:bg-blue-200 dark:bg-gray-800"
             onClick={() => {
               navigate(`/users/edit/${row.getValue("id")}`);
             }}
@@ -113,7 +113,7 @@ export const columns: ColumnDef<User>[] = [
           {row.getValue("is_black_listed") === false ? (
             <Button
               variant="default"
-              className="bg-white dark:bg-gray-800 hover:bg-red-300 text-red-500 font-semibold"
+              className="bg-white dark:bg-gray-800 hover:bg-red-300 dark:hover:bg-red-300 text-red-500 font-semibold"
               onClick={async () => {
                 await mutateAsync({ id: row.getValue("id"), value: "true" });
               }}
@@ -123,7 +123,7 @@ export const columns: ColumnDef<User>[] = [
           ) : (
             <Button
               variant="default"
-              className="bg-white dark:bg-gray-800 hover:bg-green-300 text-green-500 font-semibold"
+              className="bg-white dark:bg-gray-800 hover:bg-green-300  dark:hover:bg-green-300 text-green-500 font-semibold"
               onClick={async () => {
                 await mutateAsync({ id: row.getValue("id"), value: "false" });
               }}
