@@ -9,15 +9,21 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const UserEdit = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-1 flex-col h-screen">
-      <nav className="w-full flex items-center border-b justify-between py-4">
-        <span className="text-2xl text-gray-800 dark:text-white ml-10 font-medium">
+      <nav className="w-full flex items-center border-b py-4">
+        <Button variant={"link"} onClick={() => navigate("/users")}>
+          <ChevronLeft size={30} />
+        </Button>
+        <span className="text-2xl text-gray-800 dark:text-white font-medium">
           Edit user information
         </span>
-        <div className="mr-6">
+        <div className="ml-auto mr-6">
           <ModeToggle />
         </div>
       </nav>

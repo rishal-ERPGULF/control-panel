@@ -12,12 +12,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   interface Inputs {
     first_name: string;
     last_name: string;
@@ -80,11 +83,14 @@ const UserRegister = () => {
   };
   return (
     <div className="flex flex-1 flex-col h-screen">
-      <nav className="w-full flex items-center border-b justify-between py-4">
-        <span className="text-2xl text-gray-800 dark:text-white ml-10 font-medium">
+      <nav className="w-full flex items-center border-b py-4">
+        <Button variant={"link"} onClick={() => navigate("/users")}>
+          <ChevronLeft size={30} />
+        </Button>
+        <span className="text-2xl text-gray-800 dark:text-white font-medium">
           Register new user
         </span>
-        <div className="mr-6">
+        <div className="ml-auto mr-6">
           <ModeToggle />
         </div>
       </nav>
