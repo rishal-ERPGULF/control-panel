@@ -6,6 +6,7 @@ import UserManage from "@/screens/UserManage";
 import UserRegister from "@/screens/UserRegister";
 import UserEdit from "@/screens/UserEdit";
 import City from "@/screens/City";
+import CityAdd from "@/screens/CityAdd";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
         path: "/city",
         children: [
           { index: true, element: <City /> },
-          { path: "new", element: <div>new</div> },
+          { path: "new", element: <CityAdd /> },
           { path: "edit/:id", element: <div>edit</div> },
         ],
       },

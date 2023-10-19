@@ -82,7 +82,6 @@ export const enableDisableUser = async (id: string, value: string) => {
     });
     return Promise.resolve(data.data.message);
   } catch (error) {
-    console.error(error);
     return Promise.reject(new Error("Failed to enable/disable user"));
   }
 };
@@ -100,6 +99,7 @@ export const NewUserRegister = async (formData: userRegisterForm) => {
     await AdminApi.post("/user/register", formData);
     return Promise.resolve();
   } catch (error) {
+    console.error(error);
     return Promise.reject(new Error("Failed to register user"));
   }
 };
@@ -110,5 +110,16 @@ export const getAllCities = async () => {
     return data.data;
   } catch (error) {
     return Promise.reject(new Error("Failed to fetch cities"));
+  }
+};
+export const addCity = async (name: string, name_in_arabic: string) => {
+  try {
+    await AdminApi.post("/city/add", {
+      name,
+      name_in_arabic,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to add city"));
   }
 };

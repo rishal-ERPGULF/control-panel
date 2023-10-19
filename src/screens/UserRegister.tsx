@@ -12,14 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
+import { useMutation } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
   const { toast } = useToast();
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   interface Inputs {
     first_name: string;
@@ -46,10 +45,27 @@ const UserRegister = () => {
       confirmPassword: "",
     },
   });
+  interface InputsMn {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone?: string;
+    qid?: string;
+    password: string;
+  }
+
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: (data: InputsMn) => NewUserRegister(data),
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+      });
+    },
+  });
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     try {
-      setIsLoading(true);
-      await NewUserRegister({
+      await mutateAsync({
         first_name: data.first_name,
         last_name: data.last_name,
         email: data.email,
@@ -63,22 +79,21 @@ const UserRegister = () => {
             title: "User added successfully.",
             description: "User has been added successfully.",
           });
+          navigate("/users");
         })
-        .catch((error) => {
+        .catch(() => {
           toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
-            description: error,
+            description: "There was a problem with adding new user.",
           });
         });
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your login attempt.",
+        description: "There was a problem with adding new user.",
       });
-    } finally {
-      setIsLoading(false); // Ensure that this code is always executed
     }
   };
   return (
