@@ -1,3 +1,4 @@
+import exp from "constants";
 import AdminApi from "./ApiManger";
 import { loginForm } from "./Types/AdminType";
 
@@ -70,6 +71,7 @@ export const fetchAllUsers = async () => {
     const { data } = await AdminApi.get("/user/get-all/0");
     return data.data;
   } catch (error) {
+    console.error(error);
     return Promise.reject(new Error("Failed to fetch users"));
   }
 };
@@ -114,12 +116,21 @@ export const getAllCities = async () => {
 };
 export const addCity = async (name: string, name_in_arabic: string) => {
   try {
-    await AdminApi.post("/city/add", {
+    await AdminApi.post("/city/", {
       name,
       name_in_arabic,
     });
     return Promise.resolve();
   } catch (error) {
     return Promise.reject(new Error("Failed to add city"));
+  }
+};
+
+export const deleteCity = async (id: string) => {
+  try {
+    await AdminApi.delete(`/city/${id}`);
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to delete city"));
   }
 };
