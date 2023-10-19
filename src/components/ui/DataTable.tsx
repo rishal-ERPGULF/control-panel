@@ -26,11 +26,13 @@ import { Search } from "lucide-react";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  searchColumn: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  searchColumn,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -53,12 +55,14 @@ export function DataTable<TData, TValue>({
   return (
     <div className="border-2 border-gray-300 dark:border-gray-500 rounded-md">
       <div className="flex items-center p-4 justify-end">
-        <div className="flex items-center border-2 rounded-lg">
+        <div className="flex items-center border-2 rounded-lg my-2">
           <Input
-            placeholder="search by email..."
-            value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+            placeholder={`search by ${searchColumn}...`}
+            value={
+              (table.getColumn(searchColumn)?.getFilterValue() as string) ?? ""
+            }
             onChange={(event) =>
-              table.getColumn("email")?.setFilterValue(event.target.value)
+              table.getColumn(searchColumn)?.setFilterValue(event.target.value)
             }
             className="max-w-sm bg-transparent border-0 flex-1"
           />

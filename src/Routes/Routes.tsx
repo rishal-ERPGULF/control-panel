@@ -5,6 +5,7 @@ import { LoginRoute, ProtectedRoute } from "./Auth";
 import UserManage from "@/screens/UserManage";
 import UserRegister from "@/screens/UserRegister";
 import UserEdit from "@/screens/UserEdit";
+import City from "@/screens/City";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
         ],
       },
       { path: "/bids", element: <div>bids</div> },
+      {
+        path: "/city",
+        children: [
+          { index: true, element: <City /> },
+          { path: "new", element: <div>new</div> },
+          { path: "edit/:id", element: <div>edit</div> },
+        ],
+      },
       { path: "*", element: <div>Not Found</div> },
     ],
   },

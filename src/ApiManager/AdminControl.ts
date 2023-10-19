@@ -103,3 +103,12 @@ export const NewUserRegister = async (formData: userRegisterForm) => {
     return Promise.reject(new Error("Failed to register user"));
   }
 };
+
+export const getAllCities = async () => {
+  try {
+    const { data } = await AdminApi.get("/city/");
+    return data.data;
+  } catch (error) {
+    return Promise.reject(new Error("Failed to fetch cities"));
+  }
+};

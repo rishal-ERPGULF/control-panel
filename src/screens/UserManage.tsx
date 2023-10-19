@@ -33,12 +33,12 @@ const UserManage = () => {
             <div className="flex justify-end">
               <Button
                 onClick={() => navigate("new")}
-                className="font-semibold dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-100 text-gray-800"
+                className="font-semibold dark:bg-gray-950 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-200 text-gray-800"
               >
                 New User
               </Button>
             </div>
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={columns} data={data} searchColumn="email"/>
           </div>
         ) : (
           <span className="text-lg text-gray-800 dark:text-white">

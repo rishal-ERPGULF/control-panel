@@ -1,6 +1,6 @@
 import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
-import { LayoutDashboard, Users, LayoutList } from "lucide-react";
+import { LayoutDashboard, Users, LayoutList, MapPin } from "lucide-react";
 import { Outlet, useLocation } from "react-router-dom";
 
 const RootLayout = () => {
@@ -25,6 +25,12 @@ const RootLayout = () => {
           text="Bids"
           icon={<LayoutList />}
           active={currentPath === "/bids"}
+        />
+        <SideBarItem
+          path="/city"
+          text="City"
+          icon={<MapPin />}
+          active={currentPath === "/city"}
         />
       </SideBar>
       <div className="flex-1">
