@@ -6,6 +6,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCity } from "@/ApiManager/AdminControl";
 import { useToast } from "./use-toast";
 import { Loader2 } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addCityDetails } from "@/redux/slices/CitySlice";
+import { useNavigate } from "react-router-dom";
 
 export type city = {
   id: string;
@@ -33,6 +36,8 @@ export const cityColumns: ColumnDef<city>[] = [
     ),
     cell: ({ row }) => {
       const queryClient = useQueryClient();
+      const dispatch = useDispatch();
+      const navigate = useNavigate();
       const { toast } = useToast();
       type id = string;
       const { mutateAsync, isLoading } = useMutation({
@@ -58,7 +63,14 @@ export const cityColumns: ColumnDef<city>[] = [
           <Button
             className="bg-white hover:bg-blue-200 dark:hover:bg-blue-200 dark:bg-gray-800"
             onClick={() => {
-              console.log(row);
+              dispatch(
+                addCityDetails({
+                  id: row.getValue("id"),
+                  name: row.getValue("name"),
+                  name_in_arabic: row.getValue("name_localized"),
+                })
+              );
+              navigate(`edit/${row.getValue("id")}`);
             }}
           >
             <span className="text-blue-500 font-semibold">Edit</span>

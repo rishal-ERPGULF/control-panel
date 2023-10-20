@@ -133,3 +133,18 @@ export const deleteCity = async (id: string) => {
     return Promise.reject(new Error("Failed to delete city"));
   }
 };
+export const editCity = async (
+  name: string,
+  name_in_arabic: string,
+  id: string
+) => {
+  try {
+    await AdminApi.put(`/city/${id}`, {
+      name,
+      name_in_arabic,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to add city"));
+  }
+};

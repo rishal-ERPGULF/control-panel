@@ -1,4 +1,4 @@
-import { addCity } from "@/ApiManager/AdminControl";
+import { editCity } from "@/ApiManager/AdminControl";
 import { ButtonLoading } from "@/components/ui/ButtonLoading";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
@@ -11,27 +11,31 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { selectCity } from "@/redux/slices/CitySlice";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { useMutation } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const CityAdd = () => {
+const CityEdit = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const cityDetails = useSelector(selectCity);
   interface Inputs {
     name: string;
     name_in_arabic: string;
+    id: string;
   }
   const { isLoading, mutateAsync } = useMutation({
-    mutationFn: ({ name, name_in_arabic }: Inputs) =>
-      addCity(name, name_in_arabic),
+    mutationFn: ({ name, name_in_arabic, id }: Inputs) =>
+      editCity(name, name_in_arabic, id),
     onError: () => {
       toast({
         variant: "destructive",
         title: "Oh no! Something went wrong.",
-        description: "Failed to add new city.",
+        description: "Failed to edit city.",
       });
     },
   });
@@ -41,8 +45,9 @@ const CityAdd = () => {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      name: "",
-      name_in_arabic: "",
+      name: cityDetails.name,
+      name_in_arabic: cityDetails.name_in_arabic,
+      id:cityDetails.id
     },
   });
   const onSubmit = async (data: Inputs) => {
@@ -50,14 +55,14 @@ const CityAdd = () => {
       await mutateAsync(data);
       toast({
         variant: "default",
-        title: "City added successfully.",
+        title: "City edited successfully.",
       });
       navigate("/city");
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Oh no! Something went wrong.",
-        description: "Failed to add new city.",
+        description: "Failed to edit city.",
       });
     }
   };
@@ -68,7 +73,7 @@ const CityAdd = () => {
           <ChevronLeft size={30} />
         </Button>
         <span className="text-2xl text-gray-800 dark:text-white font-medium">
-          Add new city
+          Edit city info
         </span>
         <div className="ml-auto mr-6">
           <ModeToggle />
@@ -79,7 +84,7 @@ const CityAdd = () => {
           <CardHeader>
             <CardTitle className="mb-1">
               <span className="text-xl text-gray-800 dark:text-white font-medium text-left underline underline-offset-4 cursor-default">
-                Add new city.
+                Edit city
               </span>
             </CardTitle>
           </CardHeader>
@@ -128,7 +133,7 @@ const CityAdd = () => {
                 className="w-full font-semibold bg-gray-950 hover:bg-gray-300 text-white dark:text-gray-900 dark:bg-gray-300 dark:hover:bg-gray-950 dark:hover:text-white"
                 variant={"outline"}
               >
-                ADD NEW CITY
+                EDIT CITY
               </Button>
             )}
           </CardFooter>
@@ -138,4 +143,4 @@ const CityAdd = () => {
   );
 };
 
-export default CityAdd;
+export default CityEdit;
