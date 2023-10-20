@@ -23,7 +23,7 @@ const City = () => {
           <ModeToggle />
         </div>
       </nav>
-      <div className="flex-1 bg-gray-100 dark:bg-gray-900">
+      <div className="flex-1 bg-gray-200 dark:bg-gray-900">
         <div className="hidden h-full flex-1 flex-grow flex-col space-y-4 p-5 md:flex">
           {isLoading ? (
             <div className="absolute left-1/2 top-1/3">

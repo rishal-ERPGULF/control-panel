@@ -109,7 +109,7 @@ const UserRegister = () => {
           <ModeToggle />
         </div>
       </nav>
-      <div className="flex-1 bg-gray-100 dark:bg-gray-900">
+      <div className="flex-1 bg-gray-200 dark:bg-gray-900">
         <Card className="bg-transparent border-0 shadow-none ml-4 w-fit">
           <CardHeader>
             <CardTitle className="mb-4">

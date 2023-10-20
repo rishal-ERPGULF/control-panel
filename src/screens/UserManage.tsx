@@ -23,7 +23,7 @@ const UserManage = () => {
           <ModeToggle />
         </div>
       </nav>
-      <div className="flex flex-1 bg-gray-100 dark:bg-gray-900">
+      <div className="flex flex-1 bg-gray-200 dark:bg-gray-900">
         {isLoading ? (
           <div className="absolute left-1/2 top-1/3">
             <Loader2 size={64} className="animate-spin" />

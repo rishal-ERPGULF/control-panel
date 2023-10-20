@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="border-2 border-gray-300 dark:border-gray-500 rounded-md">
       <div className="flex items-center p-4 justify-end">
-        <div className="flex items-center border-2 rounded-lg my-2">
+        <div className="flex items-center border-2 rounded-lg my-2 border-gray-300 dark:border-gray-500">
           <Input
             placeholder={`search by ${searchColumn}...`}
             value={
