@@ -1,4 +1,4 @@
-import { fetchAllUsers } from "@/ApiManager/AdminControl";
+import { getAllUsers } from "@/ApiManager/AdminControl";
 import { columns } from "@/components/ui/Colums";
 import { DataTable } from "@/components/ui/DataTable";
 import { ModeToggle } from "@/components/ui/ModeToggle";
@@ -11,7 +11,7 @@ const UserManage = () => {
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["users"],
-    queryFn: fetchAllUsers,
+    queryFn: getAllUsers,
   });
   return (
     <div className="flex flex-1 flex-col h-screen">

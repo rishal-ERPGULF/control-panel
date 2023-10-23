@@ -9,6 +9,8 @@ import City from "@/screens/City";
 import CityAdd from "@/screens/CityAdd";
 import CityEdit from "@/screens/CityEdit";
 import Features from "@/screens/Features";
+import FeaturesAdd from "@/screens/FeaturesAdd";
+import FeaturesEdit from "@/screens/FeaturesEdit";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,17 @@ const router = createBrowserRouter([
       },
       {
         path: "/features",
-        children: [{ index: true, element: <Features /> }],
+        children: [
+          { index: true, element: <Features /> },
+          {
+            path: "new",
+            element: <FeaturesAdd />,
+          },
+          {
+            path: "edit/:id",
+            element: <FeaturesEdit/>,
+          }
+        ],
       },
       { path: "*", element: <div>Not Found</div> },
     ],

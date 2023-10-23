@@ -12,12 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 const CityAdd = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { toast } = useToast();
   interface Inputs {
@@ -34,6 +35,9 @@ const CityAdd = () => {
         description: "Failed to add new city.",
       });
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["city"]);
+    }
   });
   const {
     register,

@@ -65,7 +65,7 @@ export const AdminLogin = async (formData: loginForm) => {
   }
 };
 
-export const fetchAllUsers = async () => {
+export const getAllUsers = async () => {
   try {
     const { data } = await AdminApi.get("/user/get-all/0");
     return data.data;
@@ -146,5 +146,52 @@ export const editCity = async (
     return Promise.resolve();
   } catch (error) {
     return Promise.reject(new Error("Failed to add city"));
+  }
+};
+
+export const getAllFeatures = async () => {
+  try {
+    const { data } = await AdminApi.get("/attributes/");
+    return data.data;
+  } catch (error) {
+    return Promise.reject(new Error("Failed to fetch features"));
+  }
+};
+
+export const addFeature = async (name: string, name_in_arabic: string) => {
+  try {
+    await AdminApi.post("/attributes/", {
+      name,
+      name_in_arabic,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to add feature"));
+  }
+};
+
+export const deleteFeature = async (id: string) => {
+  try {
+    await AdminApi.delete(`/attributes/${id}`);
+    return Promise.resolve();
+  } catch (error) {
+    console.error(`Error deleting feature: ${error}`);
+    return Promise.reject(new Error("Failed to delete feature"));
+  }
+};
+export const editFeature = async (
+  name: string,
+  name_in_arabic: string,
+  id: string
+) => {
+  try {
+    await AdminApi.put(`/attributes/${id}`, {
+      name,
+      name_in_arabic,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    console.error(`Error editing feature: ${error}`);
+    return Promise.reject(new Error("Failed to edit feature"));
   }
 };

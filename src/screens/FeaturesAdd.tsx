@@ -1,4 +1,4 @@
-import { editCity } from "@/ApiManager/AdminControl";
+import { addFeature } from "@/ApiManager/AdminControl";
 import { ButtonLoading } from "@/components/ui/ButtonLoading";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
@@ -11,36 +11,35 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { selectCity } from "@/redux/slices/CitySlice";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { ChevronLeft } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const CityEdit = () => {
+const FeaturesAdd = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const cityDetails = useSelector(selectCity);
-  const queryClient = useQueryClient();
   interface Inputs {
     name: string;
     name_in_arabic: string;
-    id: string;
   }
   const { isLoading, mutateAsync } = useMutation({
-    mutationFn: ({ name, name_in_arabic, id }: Inputs) =>
-      editCity(name, name_in_arabic, id),
+    mutationFn: ({ name, name_in_arabic }: Inputs) =>
+      addFeature(name, name_in_arabic),
     onError: () => {
       toast({
         variant: "destructive",
         title: "Oh no! Something went wrong.",
-        description: "Failed to edit city.",
+        description: "Failed to add new feature.",
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["city"]);
+      queryClient.invalidateQueries(["features"]);
     },
   });
   const {
@@ -49,9 +48,8 @@ const CityEdit = () => {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
-      name: cityDetails.name,
-      name_in_arabic: cityDetails.name_in_arabic,
-      id:cityDetails.id
+      name: "",
+      name_in_arabic: "",
     },
   });
   const onSubmit = async (data: Inputs) => {
@@ -59,25 +57,25 @@ const CityEdit = () => {
       await mutateAsync(data);
       toast({
         variant: "default",
-        title: "City edited successfully.",
+        title: "Feature added successfully.",
       });
-      navigate("/city");
+      navigate("/features");
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Oh no! Something went wrong.",
-        description: "Failed to edit city.",
+        description: "Failed to add new feature.",
       });
     }
   };
   return (
     <div className="flex flex-1 flex-col h-screen">
       <nav className="w-full flex items-center border-b py-4">
-        <Button variant={"link"} onClick={() => navigate("/city")}>
+        <Button variant={"link"} onClick={() => navigate("/features")}>
           <ChevronLeft size={30} />
         </Button>
         <span className="text-2xl text-gray-800 dark:text-white font-medium">
-          Edit city info
+          Add new feature
         </span>
         <div className="ml-auto mr-6">
           <ModeToggle />
@@ -88,7 +86,7 @@ const CityEdit = () => {
           <CardHeader>
             <CardTitle className="mb-1">
               <span className="text-xl text-gray-800 dark:text-white font-medium text-left underline underline-offset-4 cursor-default">
-                Edit city
+                Add new feature.
               </span>
             </CardTitle>
           </CardHeader>
@@ -137,7 +135,7 @@ const CityEdit = () => {
                 className="w-full font-semibold bg-gray-950 hover:bg-gray-300 text-white dark:text-gray-900 dark:bg-gray-300 dark:hover:bg-gray-950 dark:hover:text-white"
                 variant={"outline"}
               >
-                EDIT CITY
+                ADD NEW FEATURE
               </Button>
             )}
           </CardFooter>
@@ -147,4 +145,4 @@ const CityEdit = () => {
   );
 };
 
-export default CityEdit;
+export default FeaturesAdd;
