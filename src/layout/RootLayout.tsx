@@ -3,7 +3,6 @@ import SideBarItem from "@/components/ui/SideBarItem";
 import {
   LayoutDashboard,
   Users,
-  LayoutList,
   Blocks,
   Building2,
 } from "lucide-react";
