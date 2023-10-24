@@ -11,6 +11,7 @@ import CityEdit from "@/screens/CityEdit";
 import Features from "@/screens/Features";
 import FeaturesAdd from "@/screens/FeaturesAdd";
 import FeaturesEdit from "@/screens/FeaturesEdit";
+import UserBids from "@/screens/UserBids";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
           { index: true, element: <UserManage /> },
           { path: "new", element: <UserRegister /> },
           { path: "edit/:id", element: <UserEdit /> },
+          { path: "bids/:id", element: <UserBids /> },
         ],
       },
       { path: "/bids", element: <div>bids</div> },
@@ -49,8 +51,8 @@ const router = createBrowserRouter([
           },
           {
             path: "edit/:id",
-            element: <FeaturesEdit/>,
-          }
+            element: <FeaturesEdit />,
+          },
         ],
       },
       { path: "*", element: <div>Not Found</div> },

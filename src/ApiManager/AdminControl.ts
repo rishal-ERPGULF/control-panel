@@ -1,3 +1,4 @@
+import exp from "constants";
 import AdminApi from "./ApiManger";
 import { loginForm } from "./Types/AdminType";
 
@@ -193,5 +194,14 @@ export const editFeature = async (
   } catch (error) {
     console.error(`Error editing feature: ${error}`);
     return Promise.reject(new Error("Failed to edit feature"));
+  }
+};
+
+export const getAllUsersBids = async (id: string) => {
+  try {
+    const { data } = await AdminApi.get(`/bids/${id}/0`);
+    return data.data;
+  } catch (error) {
+    return Promise.reject(new Error("Failed to fetch bids"));
   }
 };

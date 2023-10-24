@@ -19,7 +19,7 @@ const SideBarItem = ({ path, icon, text, active }: Props) => {
       className={`relative flex justify-center items-center py-2 my-1 font-medium rounded-md cursor-pointer transition-colors group ${
         active
           ? "bg-gradient-to-tr from-gray-300 to-gray-100 text-gray-800 dark:bg-gradient-to-tr dark:from-gray-900 dark:to-gray-800 dark:text-white"
-          : "hover:bg-gray-50 text-gray-600 dark:hover:bg-gray-900 dark:text-gray-300"
+          : "hover:bg-gray-100 text-gray-600 dark:hover:bg-gray-900 dark:text-gray-300"
       }`}
     >
       {icon}

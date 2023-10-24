@@ -1,6 +1,12 @@
 import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
-import { LayoutDashboard, Users, LayoutList, MapPin, Blocks } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  LayoutList,
+  Blocks,
+  Building2,
+} from "lucide-react";
 import { Outlet, useLocation } from "react-router-dom";
 
 const RootLayout = () => {
@@ -29,7 +35,7 @@ const RootLayout = () => {
         <SideBarItem
           path="/city"
           text="City"
-          icon={<MapPin />}
+          icon={<Building2 />}
           active={currentPath === "/city"}
         />
         <SideBarItem

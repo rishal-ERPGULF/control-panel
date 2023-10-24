@@ -71,6 +71,25 @@ export const columns: ColumnDef<User>[] = [
     ),
   },
   {
+    header: "User's Bids",
+    cell: ({ row }) => {
+      const navigate = useNavigate();
+      return (
+        <div className="flex items-center">
+          <Button
+            variant="default"
+            className="bg-white hover:bg-blue-200 dark:hover:bg-blue-200 dark:bg-gray-800"
+            onClick={() => {
+              navigate(`/users/bids/${row.getValue("id")}`);
+            }}
+          >
+            <span className="text-blue-500 font-semibold">show bids</span>
+          </Button>
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: "registered_on",
     header: "Registered On",
     cell: ({ row }) => {
