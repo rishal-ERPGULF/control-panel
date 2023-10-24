@@ -2,7 +2,7 @@ import { getAllUsersBids } from "@/ApiManager/AdminControl";
 import { DataTable } from "@/components/ui/DataTable";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
-import { cityColumns } from "@/components/ui/city-colomn";
+import { bidsColumns } from "@/components/ui/bids-colums";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, Loader2 } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -37,9 +37,9 @@ const UserBids = () => {
           ) : data ? (
             <div className="hidden h-full flex-1 flex-grow flex-col space-y-4 p-5 md:flex">
               <DataTable
-                columns={cityColumns}
+                columns={bidsColumns}
                 data={data}
-                searchColumn="name"
+                searchColumn=""
               />
             </div>
           ) : (

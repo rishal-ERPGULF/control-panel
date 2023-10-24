@@ -82,7 +82,7 @@ export const columns: ColumnDef<User>[] = [
               navigate(`/users/bids/${row.getValue("id")}`);
             }}
           >
-            <span className="text-blue-500">show user bids</span>
+            <span className="text-blue-500">view user's bids</span>
           </Button>
         </div>
       );

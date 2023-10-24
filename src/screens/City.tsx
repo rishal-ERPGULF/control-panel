@@ -2,7 +2,7 @@ import { getAllCities } from "@/ApiManager/AdminControl";
 import { DataTable } from "@/components/ui/DataTable";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
-import { cityColumns } from "@/components/ui/city-colomn";
+import { cityColumns } from "@/components/ui/city-colums";
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
