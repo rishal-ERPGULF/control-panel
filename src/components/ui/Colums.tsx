@@ -77,13 +77,12 @@ export const columns: ColumnDef<User>[] = [
       return (
         <div className="flex items-center">
           <Button
-            variant="default"
-            className="bg-white hover:bg-blue-200 dark:hover:bg-blue-200 dark:bg-gray-800"
+            variant="link"
             onClick={() => {
               navigate(`/users/bids/${row.getValue("id")}`);
             }}
           >
-            <span className="text-blue-500 font-semibold">show bids</span>
+            <span className="text-blue-500">show user bids</span>
           </Button>
         </div>
       );

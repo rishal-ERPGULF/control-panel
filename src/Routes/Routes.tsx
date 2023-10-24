@@ -32,7 +32,6 @@ const router = createBrowserRouter([
           { path: "bids/:id", element: <UserBids /> },
         ],
       },
-      { path: "/bids", element: <div>bids</div> },
       {
         path: "/city",
         children: [

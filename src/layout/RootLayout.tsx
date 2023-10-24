@@ -26,12 +26,7 @@ const RootLayout = () => {
           icon={<Users />}
           active={currentPath === "/users"}
         />
-        <SideBarItem
-          path="/bids"
-          text="Bids"
-          icon={<LayoutList />}
-          active={currentPath === "/bids"}
-        />
+     
         <SideBarItem
           path="/city"
           text="City"
