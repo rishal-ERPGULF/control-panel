@@ -39,7 +39,7 @@ const UserBids = () => {
               <DataTable
                 columns={bidsColumns}
                 data={data}
-                searchColumn=""
+                searchColumn="auction_id"
               />
             </div>
           ) : (
