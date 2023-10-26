@@ -25,7 +25,7 @@ const SideBarItem = ({ path, icon, text, active }: Props) => {
       {icon}
       <span
         className={`overflow-hidden transition-all ${
-          isOpen ? "w-52 ml-3" : "w-0"
+          isOpen ? "w-52 ml-3" : "w-0 h-0"
         }`}
       >
         {text}

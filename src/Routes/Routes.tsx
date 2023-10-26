@@ -54,6 +54,10 @@ const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: "/carmodels",
+        children: [{ index: true, element: <div>Car Models</div> }],
+      },
       { path: "*", element: <div>Not Found</div> },
     ],
   },
