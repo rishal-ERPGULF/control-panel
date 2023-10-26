@@ -1,17 +1,23 @@
+import { getAllCarBrand } from "@/ApiManager/AdminControl";
 import { DataTable } from "@/components/ui/DataTable";
 import { ModeToggle } from "@/components/ui/ModeToggle";
+import { brandColoums } from "@/components/ui/brand-columns";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const CarBrand = () => {
   const navigate = useNavigate();
-
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["brands"],
+    queryFn: getAllCarBrand,
+  });
   return (
     <div className="flex flex-1 flex-col h-screen">
       <nav className="w-full flex items-center border-b justify-between py-4">
         <span className="text-2xl text-gray-800 dark:text-white ml-10 font-medium">
-          User Management
+          Car Brands
         </span>
         <div className="mr-6">
           <ModeToggle />
@@ -29,14 +35,14 @@ const CarBrand = () => {
                 onClick={() => navigate("new")}
                 className="font-semibold dark:bg-gray-950 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-200 text-gray-800"
               >
-                New User
+                New brand
               </Button>
             </div>
-            <DataTable columns={columns} data={data} searchColumn="email" />
+            <DataTable columns={brandColoums} data={data} searchColumn="email" />
           </div>
         ) : (
           <span className="text-lg text-gray-800 dark:text-white">
-            Failed to get users data.
+            Failed to get brand data.
             <Button
               onClick={() => refetch()}
               variant={"link"}

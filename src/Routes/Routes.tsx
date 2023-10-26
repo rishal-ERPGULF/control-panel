@@ -13,6 +13,7 @@ import FeaturesAdd from "@/screens/FeaturesAdd";
 import FeaturesEdit from "@/screens/FeaturesEdit";
 import UserBids from "@/screens/UserBids";
 import CarBrand from "@/screens/CarBrand";
+import CarBrandEdit from "@/screens/CarBrandEdit";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +58,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/carmodels",
-        children: [{ index: true, element: <CarBrand /> }],
+        children: [
+          { index: true, element: <CarBrand /> },
+          { path: "edit/:id", element: <CarBrandEdit /> },
+        ],
       },
       { path: "*", element: <div>Not Found</div> },
     ],
