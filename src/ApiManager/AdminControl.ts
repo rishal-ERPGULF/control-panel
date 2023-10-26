@@ -205,3 +205,49 @@ export const getAllUsersBids = async (id: string) => {
     return Promise.reject(new Error("Failed to fetch bids"));
   }
 };
+
+export const getAllCarBrand = async () => {
+  try {
+    const { data } = await AdminApi.get("/brand");
+    return data.data;
+  } catch (error) {
+    return Promise.reject(new Error("Failed to fetch car brands"));
+  }
+};
+
+export const addCarBrand = async (name: string, name_in_arabic: string) => {
+  try {
+    await AdminApi.post("/brand", {
+      name,
+      name_in_arabic,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to add car brand"));
+  }
+};
+
+export const deleteCarBrand = async (id: string) => {
+  try {
+    await AdminApi.delete(`/brand/${id}`);
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to delete car brand"));
+  }
+};
+
+export const editCarBrand = async (
+  name: string,
+  name_in_arabic: string,
+  id: string
+) => {
+  try {
+    await AdminApi.put(`/brand/${id}`, {
+      name,
+      name_in_arabic,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to edit car brand"));
+  }
+};
