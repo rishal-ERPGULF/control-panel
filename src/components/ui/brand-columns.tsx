@@ -30,6 +30,27 @@ export const brandColoums: ColumnDef<brand>[] = [
     accessorKey: "name_localized",
   },
   {
+    id: "Manage models",
+    header: () => (
+      <div className="flex justify-center items-center">Models Management</div>
+    ),
+    cell: ({ row }) => {
+      const navigate = useNavigate();
+      return (
+        <div className="flex justify-center items-center">
+          <Button
+            variant="link"
+            onClick={() => {
+              navigate(`models/${row.getValue("id")}`);
+            }}
+          >
+            <span className="text-blue-500 ">Manage Models</span>
+          </Button>
+        </div>
+      );
+    },
+  },
+  {
     id: "actions",
     header: () => (
       <div className="flex justify-center items-center">Actions</div>
