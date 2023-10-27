@@ -251,3 +251,24 @@ export const editCarBrand = async (
     return Promise.reject(new Error("Failed to edit car brand"));
   }
 };
+
+export const getAllCarModels = async (id: string) => {
+  try {
+    const { data } = await AdminApi.get(`/models/${id}`);
+    return data.data;
+  } catch (error) {
+    return Promise.reject(new Error("Failed to fetch car models"));
+  }
+};
+
+export const addCarModel = async (id: string, name: string) => {
+  try {
+    await AdminApi.post(`/models`, {
+      name,
+      brand_id: id,
+    });
+    return Promise.resolve();
+  } catch (error) {
+    return Promise.reject(new Error("Failed to add car model"));
+  }
+};

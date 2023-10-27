@@ -1,6 +1,6 @@
 import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
-import { LayoutDashboard, Users, Blocks, Building2, Car } from "lucide-react";
+import { LayoutDashboard, Users, Blocks, Building2, Car, ListChecks } from "lucide-react";
 import { Outlet, useLocation } from "react-router-dom";
 
 const RootLayout = () => {
@@ -30,7 +30,7 @@ const RootLayout = () => {
         <SideBarItem
           path="/features"
           text="Features"
-          icon={<Blocks />}
+          icon={<ListChecks />}
           active={currentPath === "/features"}
         />
         <SideBarItem

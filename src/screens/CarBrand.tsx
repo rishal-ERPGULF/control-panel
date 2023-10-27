@@ -38,7 +38,7 @@ const CarBrand = () => {
                 New brand
               </Button>
             </div>
-            <DataTable columns={brandColoums} data={data} searchColumn="email" />
+            <DataTable columns={brandColoums} data={data} searchColumn="name" />
           </div>
         ) : (
           <span className="text-lg text-gray-800 dark:text-white">
