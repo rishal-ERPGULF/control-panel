@@ -1,6 +1,12 @@
 import SideBar from "@/components/ui/SideBar";
 import SideBarItem from "@/components/ui/SideBarItem";
-import { LayoutDashboard, Users, Blocks, Building2, Car, ListChecks } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  Building2,
+  Car,
+  ListChecks,
+} from "lucide-react";
 import { Outlet, useLocation } from "react-router-dom";
 
 const RootLayout = () => {
