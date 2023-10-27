@@ -3,11 +3,14 @@ import { DataTable } from "@/components/ui/DataTable";
 import { ModeToggle } from "@/components/ui/ModeToggle";
 import { Button } from "@/components/ui/button";
 import { modelColumns } from "@/components/ui/model-columns";
+import { setModelId } from "@/redux/slices/BrandSlice";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, Loader2 } from "lucide-react";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 const CarModel = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery({
@@ -37,7 +40,10 @@ const CarModel = () => {
             <div className="hidden h-full flex-1 flex-grow flex-col space-y-4 p-5 md:flex">
               <div className="flex justify-end">
                 <Button
-                  onClick={() => navigate("new")}
+                  onClick={() => {
+                    dispatch(setModelId(id));
+                    navigate("new");
+                  }}
                   className="font-semibold dark:bg-gray-950 dark:hover:bg-gray-800 dark:text-white bg-white hover:bg-gray-200 text-gray-800"
                 >
                   New Model

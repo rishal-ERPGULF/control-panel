@@ -1,4 +1,3 @@
-import exp from "constants";
 import AdminApi from "./ApiManger";
 import { loginForm } from "./Types/AdminType";
 
@@ -272,3 +271,4 @@ export const addCarModel = async (id: string, name: string) => {
     return Promise.reject(new Error("Failed to add car model"));
   }
 };
+

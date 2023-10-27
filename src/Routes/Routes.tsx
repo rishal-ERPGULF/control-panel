@@ -16,6 +16,7 @@ import CarBrand from "@/screens/CarBrand";
 import CarBrandEdit from "@/screens/CarBrandEdit";
 import CarBrandAdd from "@/screens/CarBrandAdd";
 import CarModel from "@/screens/CarModel";
+import CarModelAdd from "@/screens/CarModelAdd";
 
 const router = createBrowserRouter([
   {
@@ -73,8 +74,8 @@ const router = createBrowserRouter([
           },
           {
             path: "models/:id/new",
-            element: <CarModel />,
-          }
+            element: <CarModelAdd />,
+          },
         ],
       },
       { path: "*", element: <div>Not Found</div> },

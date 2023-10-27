@@ -5,11 +5,13 @@ interface brandState {
   id: string;
   name: string;
   name_in_arabic: string;
+  model_id?: string;
 }
 const initialState: brandState = {
   id: "",
   name: "",
   name_in_arabic: "",
+  model_id: "",
 };
 
 export const brandSlice = createSlice({
@@ -26,11 +28,19 @@ export const brandSlice = createSlice({
       state.name = "";
       state.name_in_arabic = "";
     },
+    setModelId: (state, action) => {
+      state.model_id = action.payload;
+    },
+    clearModelId: (state) => {
+      state.model_id = "";
+    },
   },
 });
 
-export const { addBrandDetails, clearBrand } = brandSlice.actions;
+export const { addBrandDetails, clearBrand, setModelId, clearModelId } =
+  brandSlice.actions;
 
 export const selectBrand = (state: RootState) => state.brand;
+export const selectModelId = (state: RootState) => state.brand.model_id;
 
 export default brandSlice.reducer;
